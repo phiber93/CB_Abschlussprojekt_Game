@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnm3dcg42sxyq"]
+
+[ext_resource type="Script" path="res://Enemies/BaseEnemy.gd" id="1_s2avd"]
+
+[node name="BaseEnemy" type="CharacterBody2D" groups=["enemy"]]
+y_sort_enabled = true
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_s2avd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 2)
+debug_color = Color(0.929412, 0.25098, 0.239216, 0.419608)
+
+[node name="DamageArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(0, 4)
+debug_color = Color(0, 0.643137, 0.313726, 0.419608)
+
+[node name="DamageOverTimeFlash" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="area_exited" from="Hurtbox" to="." method="_on_hurtbox_area_exited"]
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
+[connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]
+[connection signal="timeout" from="DamageOverTimeFlash" to="." method="_on_damage_over_time_flash_timeout"]

@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://x2jw5i115s5o"]
+
+[ext_resource type="PackedScene" uid="uid://dnm3dcg42sxyq" path="res://Enemies/base_enemy.tscn" id="1_wis6w"]
+[ext_resource type="Texture2D" uid="uid://cejnw51521ltp" path="res://art/chars/slime.png" id="2_hhep8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpou6"]
+atlas = ExtResource("2_hhep8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ct0s6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpou6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hrvxe"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sqs35"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kbfw1"]
+radius = 6.0
+
+[node name="Slime" instance=ExtResource("1_wis6w")]
+scale = Vector2(2, 2)
+health = 200
+DAMAGE_RATE = 0.5
+points = 30
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_ct0s6")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_hrvxe")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_sqs35")
+
+[node name="CollisionShape2D" parent="DamageArea" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_kbfw1")

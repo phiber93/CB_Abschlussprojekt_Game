@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://dvsk7wphpdl6d"]
+
+[ext_resource type="Script" path="res://weapons/fire_ball.gd" id="1_hiorm"]
+[ext_resource type="Texture2D" uid="uid://c2s88uhcytil" path="res://art/weapons/fireshot.png" id="2_nhua6"]
+[ext_resource type="Texture2D" uid="uid://cc01xmjx1g16n" path="res://art/weapons/explosion.png" id="3_gplne"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnw6a"]
+atlas = ExtResource("3_gplne")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uh3if"]
+atlas = ExtResource("3_gplne")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lym3a"]
+atlas = ExtResource("3_gplne")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3kdy"]
+atlas = ExtResource("3_gplne")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ntqu"]
+atlas = ExtResource("3_gplne")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n10xw"]
+atlas = ExtResource("3_gplne")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8rsl1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnw6a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uh3if")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lym3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3kdy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ntqu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n10xw")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xsjld"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_on35v"]
+radius = 25.0
+
+[node name="FireBall" type="Area2D" groups=["attack"]]
+top_level = true
+light_mask = 3
+visibility_layer = 3
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_hiorm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5.06639e-07, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_nhua6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_8rsl1")
+animation = &"explosion"
+
+[node name="HitDetector" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xsjld")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Explosion" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_on35v")
+disabled = true
+debug_color = Color(0.937255, 0.219608, 0.290196, 0.419608)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

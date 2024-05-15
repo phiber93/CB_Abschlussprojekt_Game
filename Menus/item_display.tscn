@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://0mbvn8sirbid"]
+
+[ext_resource type="Texture2D" uid="uid://cpv820ow4vuuy" path="res://art/upgrades/arrow.png" id="1_ba4no"]
+[ext_resource type="Script" path="res://Menus/item_display.gd" id="1_hc1q3"]
+
+[node name="ItemDisplay" type="ColorRect"]
+custom_minimum_size = Vector2(42, 52)
+offset_right = 42.0
+offset_bottom = 52.0
+color = Color(1, 1, 1, 0)
+script = ExtResource("1_hc1q3")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 42.0
+offset_bottom = 42.0
+color = Color(0, 0, 0, 1)
+
+[node name="ItemTexture" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_right = 42.0
+offset_bottom = 42.0
+texture = ExtResource("1_ba4no")
+
+[node name="Level1" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = 43.0
+offset_right = 9.0
+offset_bottom = 52.0
+color = Color(1, 1, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Level2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 43.0
+offset_right = 20.0
+offset_bottom = 52.0
+color = Color(1, 1, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Level3" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 43.0
+offset_right = 31.0
+offset_bottom = 52.0
+color = Color(1, 1, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Level4" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 43.0
+offset_right = 42.0
+offset_bottom = 52.0
+color = Color(1, 1, 0, 1)
+metadata/_edit_use_anchors_ = true

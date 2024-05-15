@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://djgh6j5vqo2cw"]
+
+[ext_resource type="PackedScene" uid="uid://dnm3dcg42sxyq" path="res://Enemies/base_enemy.tscn" id="1_ae1cu"]
+[ext_resource type="Texture2D" uid="uid://d1mm437nhx7ls" path="res://art/chars/roguelikecreatures.png" id="2_fyjr8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fi8a4"]
+atlas = ExtResource("2_fyjr8")
+region = Rect2(48, 112, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cug1m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fi8a4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ewhxb"]
+radius = 7.0
+height = 16.0
+
+[node name="Death" groups=["death"] instance=ExtResource("1_ae1cu")]
+top_level = true
+y_sort_enabled = false
+scale = Vector2(2, 2)
+speed = 400.0
+DAMAGE_RATE = 2.0
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_cug1m")
+
+[node name="CollisionShape2D" parent="DamageArea" index="0"]
+position = Vector2(-0.5, 0)
+shape = SubResource("CapsuleShape2D_ewhxb")

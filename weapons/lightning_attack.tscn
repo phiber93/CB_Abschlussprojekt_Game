@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://kt77y7asbyp5"]
+
+[ext_resource type="Texture2D" uid="uid://cv3aqelp50xnw" path="res://art/weapons/Lightning_Yellow.png" id="1_1vd5y"]
+[ext_resource type="Script" path="res://weapons/lightning_attack.gd" id="1_bpghu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7201"]
+atlas = ExtResource("1_1vd5y")
+region = Rect2(0, 0, 100, 175)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3mir"]
+atlas = ExtResource("1_1vd5y")
+region = Rect2(100, 0, 100, 175)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pi4l"]
+atlas = ExtResource("1_1vd5y")
+region = Rect2(200, 0, 100, 175)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_830bb"]
+atlas = ExtResource("1_1vd5y")
+region = Rect2(300, 0, 100, 175)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qncqf"]
+atlas = ExtResource("1_1vd5y")
+region = Rect2(400, 0, 100, 175)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mdwf"]
+atlas = ExtResource("1_1vd5y")
+region = Rect2(500, 0, 100, 175)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nsuky"]
+animations = [{
+"frames": [{
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_x7201")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_h3mir")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_1pi4l")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_830bb")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_qncqf")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_3mdwf")
+}],
+"loop": false,
+"name": &"default",
+"speed": 60.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gwk4s"]
+radius = 5.09902
+
+[node name="LightningAttack" type="Area2D" groups=["attack"]]
+top_level = true
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_bpghu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-8, -77)
+scale = Vector2(0.72, 1)
+sprite_frames = SubResource("SpriteFrames_nsuky")
+frame = 5
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+top_level = true
+shape = SubResource("CircleShape2D_gwk4s")
+disabled = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

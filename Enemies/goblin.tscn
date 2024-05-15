@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://cgimwa5cm256u"]
+
+[ext_resource type="PackedScene" uid="uid://dnm3dcg42sxyq" path="res://Enemies/base_enemy.tscn" id="1_smj2q"]
+[ext_resource type="Texture2D" uid="uid://d1mm437nhx7ls" path="res://art/chars/roguelikecreatures.png" id="2_lq41k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1eme"]
+atlas = ExtResource("2_lq41k")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xbieo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1eme")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cxv5p"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ouxfr"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i3d1p"]
+radius = 7.0
+
+[node name="Goblin" instance=ExtResource("1_smj2q")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_xbieo")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_cxv5p")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_ouxfr")
+
+[node name="CollisionShape2D" parent="DamageArea" index="0"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_i3d1p")

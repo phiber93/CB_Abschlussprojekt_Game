@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://b88lp8f81pjyo"]
+
+[ext_resource type="Script" path="res://Menus/upgrade_option.gd" id="1_abrn1"]
+[ext_resource type="Texture2D" uid="uid://c07kek4wfve7l" path="res://art/upgrades/bread.png" id="1_wyi30"]
+
+[node name="Upgrade" type="Button"]
+process_mode = 3
+custom_minimum_size = Vector2(320, 110)
+script = ExtResource("1_abrn1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 44.0
+offset_bottom = 44.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_wyi30")
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 5.0
+offset_right = 187.0
+offset_bottom = 28.0
+text = "Name"
+
+[node name="LevelLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 201.0
+offset_top = 5.0
+offset_right = 308.0
+offset_bottom = 28.0
+text = "Level: 1"
+
+[node name="DescriptionLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 47.0
+offset_right = 314.0
+offset_bottom = 104.0
+text = "Description of what the item does or does'nt do"
+autowrap_mode = 3
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkko3p1ba6jqp"]
+
+[ext_resource type="PackedScene" uid="uid://dnm3dcg42sxyq" path="res://Enemies/base_enemy.tscn" id="1_dg88p"]
+[ext_resource type="Texture2D" uid="uid://d1mm437nhx7ls" path="res://art/chars/roguelikecreatures.png" id="2_lsmrq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6kvy"]
+atlas = ExtResource("2_lsmrq")
+region = Rect2(16, 96, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mqwrg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6kvy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_de1e2"]
+radius = 5.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y78a6"]
+radius = 7.0
+height = 18.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yha6v"]
+radius = 5.0
+height = 16.0
+
+[node name="Skeleton" instance=ExtResource("1_dg88p")]
+health = 30
+DAMAGE_RATE = 0.2
+points = 2
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_mqwrg")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_de1e2")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("CapsuleShape2D_y78a6")
+
+[node name="CollisionShape2D" parent="DamageArea" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("CapsuleShape2D_yha6v")

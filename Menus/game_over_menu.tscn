@@ -1,0 +1,152 @@
+[gd_scene load_steps=3 format=3 uid="uid://c87c7w0ywgw80"]
+
+[ext_resource type="Script" path="res://Menus/game_over_menu.gd" id="1_mp276"]
+[ext_resource type="Script" path="res://Menus/SendScores.gd" id="2_64d5h"]
+
+[node name="GameOverMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mp276")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.698039)
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -365.0
+offset_top = 66.0
+offset_right = 369.0
+offset_bottom = 241.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 128
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/ColorRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -135.0
+offset_top = 240.0
+offset_right = 126.0
+offset_bottom = 301.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Score: 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/ColorRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -60.0
+offset_right = 180.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Time survived: 10:23"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemsCollectedLabel" type="Label" parent="CanvasLayer/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -10.0
+offset_right = 130.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Final Equipment:"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="CanvasLayer/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -171.0
+offset_top = 40.0
+offset_right = 171.0
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -83.5
+offset_top = -190.0
+offset_right = 83.5
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 17
+
+[node name="SubmitButton" type="Button" parent="CanvasLayer/ColorRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Submit Score"
+
+[node name="ScoreSentLabel" type="Label" parent="CanvasLayer/ColorRect/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Score submitted"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryButton" type="Button" parent="CanvasLayer/ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "Try again"
+metadata/_edit_use_anchors_ = true
+
+[node name="MainMenuButton" type="Button" parent="CanvasLayer/ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+metadata/_edit_use_anchors_ = true
+
+[node name="SendScores" type="HTTPRequest" parent="."]
+script = ExtResource("2_64d5h")
+
+[connection signal="pressed" from="CanvasLayer/ColorRect/VBoxContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ColorRect/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ColorRect/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="request_completed" from="SendScores" to="SendScores" method="_on_request_completed"]

@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://mdjw3f28neko"]
+
+[ext_resource type="PackedScene" uid="uid://dnm3dcg42sxyq" path="res://Enemies/base_enemy.tscn" id="1_xho31"]
+[ext_resource type="Texture2D" uid="uid://d1mm437nhx7ls" path="res://art/chars/roguelikecreatures.png" id="2_6crpn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmylk"]
+atlas = ExtResource("2_6crpn")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xacw1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmylk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0u7u0"]
+radius = 5.09902
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wlf0p"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lgooq"]
+radius = 8.0
+
+[node name="Wolf" instance=ExtResource("1_xho31")]
+speed = 100.0
+health = 10
+DAMAGE_RATE = 0.2
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_xacw1")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_0u7u0")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_wlf0p")
+debug_color = Color(0.929412, 0.25098, 0.239216, 0.419608)
+
+[node name="CollisionShape2D" parent="DamageArea" index="0"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_lgooq")
